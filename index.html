@@ -177,6 +177,71 @@
 
   .pvs-card:hover .go { color: var(--blue); }
 
+  /* ---------- Flyer-Downloads ---------- */
+  .flyer-block {
+    margin-top: 52px;
+    padding-top: 36px;
+    border-top: 1px solid var(--line);
+    max-width: 980px;
+  }
+
+  .flyer-block h2 {
+    font-family: var(--font-display);
+    font-size: 24px;
+    font-weight: 700;
+    margin: 0;
+    letter-spacing: -0.01em;
+  }
+
+  .flyer-lede {
+    margin: 8px 0 22px;
+    color: var(--ink-soft);
+    font-size: 15px;
+  }
+
+  .flyer-list { display: grid; gap: 14px; }
+
+  .flyer-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    background: var(--card);
+    border-radius: 14px;
+    box-shadow: var(--shadow);
+    padding: 18px 20px;
+    text-decoration: none;
+    color: var(--ink);
+    border: 2px solid transparent;
+    transition: border-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .flyer-card:hover {
+    border-color: var(--blue);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 28px rgba(43, 31, 217, 0.12);
+  }
+
+  .flyer-card:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
+
+  .flyer-icon {
+    flex: 0 0 auto;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: var(--beige);
+    color: var(--blue);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+
+  .flyer-card:hover .flyer-icon { background: var(--blue); color: #fff; }
+
+  .flyer-text { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+  .flyer-title { font-weight: 650; font-size: 16px; color: var(--blue); }
+  .flyer-desc { font-size: 13.5px; color: var(--ink-soft); line-height: 1.45; }
+
   /* ---------- Tabs ---------- */
   .tabs {
     display: inline-flex;
@@ -488,6 +553,31 @@
         <span class="go">Workflows ansehen &rarr;</span>
       </a>
     </div>
+
+    <section class="flyer-block" aria-labelledby="flyerHead">
+      <h2 id="flyerHead">Flyer für Ihre Patienten</h2>
+      <p class="flyer-lede">Hier können Sie zusätzlich Flyer für Ihre Patienten herunterladen:</p>
+      <div class="flyer-list">
+        <a class="flyer-card" href="https://drive.google.com/file/d/1JYcNJLvLURlGHVKi_JwFGHL6_BWnStZ3/view?usp=sharing" target="_blank" rel="noopener noreferrer">
+          <span class="flyer-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 12 5 5 5-5"/><path d="M5 21h14"/></svg>
+          </span>
+          <span class="flyer-text">
+            <span class="flyer-title">Datenschutz-Infoblatt</span>
+            <span class="flyer-desc">Datenschutz-Infoblatt für Ihre Patienten.</span>
+          </span>
+        </a>
+        <a class="flyer-card" href="https://drive.google.com/file/d/15HejpQ4sASHfOyvkwwRiw-2teMKJ8wEW/view?usp=sharing" target="_blank" rel="noopener noreferrer">
+          <span class="flyer-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 12 5 5 5-5"/><path d="M5 21h14"/></svg>
+          </span>
+          <span class="flyer-text">
+            <span class="flyer-title">Flyer: Behandlungspläne digital unterschreiben</span>
+            <span class="flyer-desc">Damit Ihre Patienten über die Möglichkeit informiert sind, Behandlungspläne digital zu unterschreiben – zum Ausdrucken und Auslegen im Patientenbereich.</span>
+          </span>
+        </a>
+      </div>
+    </section>
 
   </section>
 
