@@ -460,10 +460,6 @@
       </a>
     </div>
 
-    <footer class="site">
-      <span>Leitfaden, um den Roger&#8209;Desk aufzuräumen</span>
-      <span>Bitte keine echten Patientendaten in Screenshots oder Schulungen verwenden.</span>
-    </footer>
   </section>
 
   <!-- ================= PVS-Seite ================= -->
@@ -486,11 +482,6 @@
     </div>
 
     <div class="legend" id="legend"></div>
-
-    <footer class="site">
-      <span id="footerNote">Leitfaden, um den Roger&#8209;Desk aufzuräumen</span>
-      <span>Bitte keine echten Patientendaten in Screenshots oder Schulungen verwenden.</span>
-    </footer>
   </section>
 </div>
 
@@ -805,7 +796,6 @@
   const legend = document.getElementById("legend");
   const brandTitle = document.getElementById("brandTitle");
   const variantTitle = document.getElementById("variantTitle");
-  const footerNote = document.getElementById("footerNote");
 
   let currentPvs = null;
   let currentTab = "hkp";
@@ -894,7 +884,6 @@
     const pvs = PVS[pvsKey];
     brandTitle.innerHTML = pvs.name;
     variantTitle.textContent = currentTab === "hkp" ? "HKP" : "Privatpläne";
-    footerNote.innerHTML = pvs.footer;
     legend.innerHTML = "<span>&#9432;</span>" +
       '<span>Plan &rarr; <span class="chip">' + pvs.legendHidden + "</span>: Plan wird aus Roger ausgeblendet</span>" +
       '<span><span class="chip">Offen</span>: &bdquo;to&#8209;do&ldquo;-Bereich</span>' +
