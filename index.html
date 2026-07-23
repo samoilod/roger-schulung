@@ -227,7 +227,7 @@
     position: relative;
     min-width: 1240px;
     display: grid;
-    grid-template-columns: 150px repeat(6, minmax(190px, 1fr));
+    grid-template-columns: 150px repeat(6, minmax(216px, 1fr));
     gap: 12px 14px;
     align-items: stretch;
   }
@@ -344,12 +344,26 @@
   .pillrow {
     display: flex;
     align-items: center;
-    flex-wrap: wrap;
-    gap: 6px;
+    flex-wrap: nowrap;
+    gap: 5px;
   }
 
   .pillrow + .pillrow { margin-top: 8px; }
-  .pillrow .plus { color: var(--ink-soft); font-weight: 650; }
+  .pillrow .plus { color: var(--ink-soft); font-weight: 650; flex: 0 0 auto; }
+
+  .pillrow .pill {
+    font-size: 12px;
+    padding: 4px 11px;
+    white-space: nowrap;
+    flex: 0 0 auto;
+  }
+
+  /* Lange Statuswerte dürfen innerhalb der Pille umbrechen */
+  .pillrow .pill.wrap {
+    white-space: normal;
+    flex: 0 1 auto;
+    text-align: center;
+  }
 
   .chip {
     display: inline;
@@ -866,7 +880,7 @@
           } else if (it.kind === "pills") {
             c.className = "card";
             c.innerHTML = it.rows.map((r) =>
-              '<div class="pillrow">' + r.map((t) => '<span class="pill">' + t + "</span>").join('<span class="plus">+</span>') + "</div>"
+              '<div class="pillrow">' + r.map((t) => '<span class="pill' + (t.length > 14 ? " wrap" : "") + '">' + t + "</span>").join('<span class="plus">+</span>') + "</div>"
             ).join("");
           } else if (it.kind === "empty") {
             c.className = "card empty";
