@@ -1,0 +1,997 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Roger – Schulungsunterlagen</title>
+<style>
+  :root {
+    --bg: #f5f1ec;
+    --ink: #17161d;
+    --ink-soft: #4c4a52;
+    --blue: #2b1fd9;
+    --blue-dark: #1f16a8;
+    --card: #ffffff;
+    --beige: #eae4dc;
+    --beige-deep: #e2dbd1;
+    --chip: #ddd6cc;
+    --label-bg: #e9e4dd;
+    --line: #e3dcd3;
+    --shadow: 0 1px 2px rgba(23, 22, 29, 0.05), 0 6px 18px rgba(23, 22, 29, 0.06);
+    --radius: 14px;
+    --font-body: "Avenir Next", "Segoe UI", system-ui, -apple-system, sans-serif;
+    --font-display: "Iowan Old Style", "Palatino", "Book Antiqua", Georgia, serif;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body { margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 48px 32px 64px;
+  }
+
+  /* ---------- Header ---------- */
+  header.site {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 12px;
+  }
+
+  .eyebrow {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin: 0 0 10px;
+  }
+
+  h1 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(34px, 5vw, 56px);
+    line-height: 1.05;
+    margin: 0;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+  }
+
+  h1 .brand {
+    color: var(--blue);
+    position: relative;
+    white-space: nowrap;
+  }
+
+  h1 .brand::after {
+    content: "";
+    position: absolute;
+    left: -2px;
+    right: -2px;
+    bottom: 0.02em;
+    height: 0.16em;
+    background: #e8d9bd;
+    border-radius: 999px;
+    z-index: -1;
+  }
+
+  h1 .variant { color: var(--ink); }
+
+  .hint {
+    margin: 14px 0 0;
+    color: var(--ink-soft);
+    font-size: 14px;
+    max-width: 62ch;
+  }
+
+  .hint strong { color: var(--ink); font-weight: 600; }
+
+  .backlink {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin: 0 0 14px;
+    color: var(--ink-soft);
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 8px;
+    padding: 4px 8px 4px 4px;
+  }
+
+  .backlink:hover { color: var(--blue); background: var(--beige); }
+  .backlink:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+
+  /* ---------- Startseite ---------- */
+  #homeView .lede {
+    margin: 16px 0 0;
+    color: var(--ink-soft);
+    font-size: 16px;
+    max-width: 58ch;
+  }
+
+  .pvs-grid {
+    margin-top: 40px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 18px;
+    max-width: 980px;
+  }
+
+  .pvs-card {
+    display: block;
+    background: var(--card);
+    border-radius: 18px;
+    box-shadow: var(--shadow);
+    padding: 28px 26px 24px;
+    text-decoration: none;
+    color: var(--ink);
+    border: 2px solid transparent;
+    transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .pvs-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--blue);
+    box-shadow: 0 10px 28px rgba(43, 31, 217, 0.12);
+  }
+
+  .pvs-card:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
+
+  .pvs-card .name {
+    font-family: var(--font-display);
+    font-size: 30px;
+    font-weight: 700;
+    color: var(--blue);
+    display: block;
+  }
+
+  .pvs-card .sub {
+    display: block;
+    margin-top: 8px;
+    font-size: 13.5px;
+    color: var(--ink-soft);
+  }
+
+  .pvs-card .go {
+    display: inline-block;
+    margin-top: 18px;
+    font-weight: 650;
+    font-size: 14px;
+    color: var(--ink);
+  }
+
+  .pvs-card:hover .go { color: var(--blue); }
+
+  /* ---------- Tabs ---------- */
+  .tabs {
+    display: inline-flex;
+    gap: 4px;
+    padding: 4px;
+    background: var(--beige);
+    border-radius: 999px;
+    flex: none;
+  }
+
+  .tabs button {
+    appearance: none;
+    border: 0;
+    background: transparent;
+    font: inherit;
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--ink-soft);
+    padding: 9px 22px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+
+  .tabs button:hover { color: var(--ink); }
+
+  .tabs button[aria-selected="true"] {
+    background: var(--blue);
+    color: #fff;
+    box-shadow: var(--shadow);
+  }
+
+  .tabs button:focus-visible,
+  .phase-head:focus-visible {
+    outline: 2px solid var(--blue);
+    outline-offset: 2px;
+  }
+
+  /* ---------- Board ---------- */
+  .board-scroller {
+    overflow-x: auto;
+    margin-top: 26px;
+    padding-bottom: 8px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .board {
+    position: relative;
+    min-width: 1240px;
+    display: grid;
+    grid-template-columns: 150px repeat(6, minmax(168px, 1fr));
+    gap: 12px 14px;
+    align-items: stretch;
+  }
+
+  .phase-head {
+    grid-row: 1;
+    font-weight: 650;
+    font-size: 16px;
+    padding: 6px 10px 4px;
+    border-radius: 10px;
+    cursor: help;
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background 0.15s ease;
+  }
+
+  .phase-head .info {
+    flex: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 1.5px solid currentColor;
+    color: var(--ink-soft);
+    font-size: 11px;
+    font-weight: 700;
+    font-style: normal;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  }
+
+  .phase-head:hover, .phase-head.active { background: #efe9e1; }
+  .phase-head:hover .info, .phase-head.active .info {
+    background: var(--blue);
+    border-color: var(--blue);
+    color: #fff;
+  }
+
+  .subhead {
+    grid-row: 2;
+    align-self: center;
+    text-align: center;
+    font-size: 13.5px;
+    font-weight: 600;
+    padding: 8px 12px;
+    border-radius: 999px;
+    box-shadow: var(--shadow);
+  }
+
+  .subhead.offen { background: var(--card); }
+  .subhead.wv { background: var(--beige-deep); color: var(--ink-soft); }
+
+  .rowlabel {
+    grid-column: 1;
+    background: var(--label-bg);
+    border-radius: 10px;
+    padding: 12px;
+    font-size: 13px;
+    font-weight: 650;
+    color: var(--ink-soft);
+    align-self: stretch;
+  }
+
+  .rowlabel .roger { color: var(--blue); }
+
+  .cell {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-width: 0;
+  }
+
+  .card {
+    background: var(--card);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 14px 16px;
+    font-size: 14px;
+    flex: 1;
+    overflow-wrap: break-word;
+    hyphens: auto;
+  }
+
+  .card.fit { flex: 0 0 auto; }
+  .card.beige { background: var(--beige); box-shadow: none; }
+  .card.empty { opacity: 0.45; min-height: 44px; flex: 1; }
+
+  .card p { margin: 0; }
+  .card p + p { margin-top: 8px; }
+
+  .pill {
+    display: inline-block;
+    background: var(--blue);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 5px 14px;
+    border-radius: 999px;
+  }
+
+  .pillrow {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .pillrow + .pillrow { margin-top: 8px; }
+  .pillrow .plus { color: var(--ink-soft); font-weight: 650; }
+
+  .chip {
+    display: inline;
+    background: var(--chip);
+    border-radius: 999px;
+    padding: 1px 10px;
+    font-size: 13px;
+    font-weight: 500;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+    overflow-wrap: anywhere;
+    hyphens: auto;
+  }
+
+  .card.beige .chip { background: #d0c8bc; }
+
+  .board.dim-others .cell:not(.hl) .card,
+  .board.dim-others .subhead:not(.hl) {
+    opacity: 0.35;
+    transition: opacity 0.15s ease;
+  }
+
+  /* ---------- Hover-Panel ---------- */
+  .panel {
+    position: absolute;
+    z-index: 30;
+    width: min(480px, 90vw);
+    background: var(--ink);
+    color: #f4f1ec;
+    border-radius: 16px;
+    padding: 18px 20px;
+    box-shadow: 0 18px 44px rgba(23, 22, 29, 0.35);
+    font-size: 13.5px;
+    line-height: 1.55;
+    display: none;
+  }
+
+  .panel.open { display: block; }
+
+  .panel h3 {
+    font-family: var(--font-display);
+    font-size: 18px;
+    margin: 0 0 10px;
+    color: #fff;
+  }
+
+  .panel h3 .num { color: #b3aaff; margin-right: 6px; }
+
+  .panel ul { margin: 0; padding-left: 18px; display: grid; gap: 7px; }
+  .panel ul ul { margin-top: 7px; }
+  .panel li::marker { color: #b3aaff; }
+  .panel .k { color: #cfc9ff; font-weight: 600; }
+
+  /* ---------- Legende / Footer ---------- */
+  .legend {
+    margin-top: 20px;
+    background: var(--beige);
+    border-radius: var(--radius);
+    padding: 13px 20px;
+    font-size: 13.5px;
+    color: var(--ink-soft);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px 14px;
+  }
+
+  .legend .chip { background: #d3ccc1; color: var(--ink); }
+
+  footer.site {
+    margin-top: 36px;
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    border-top: 1px solid var(--line);
+    padding-top: 16px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 24px;
+    justify-content: space-between;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; }
+    .pvs-card:hover { transform: none; }
+  }
+
+  @media (max-width: 720px) {
+    .wrap { padding: 32px 18px 48px; }
+    header.site { align-items: flex-start; flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <!-- ================= Startseite ================= -->
+  <section id="homeView">
+    <p class="eyebrow">Roger &middot; Schulungsunterlagen</p>
+    <h1>Welches <span class="brand">Praxisverwaltungssystem</span> nutzen Sie?</h1>
+    <p class="lede">Wählen Sie Ihr PVS aus, um die passenden Roger&#8209;Workflows für HKP und Privatpläne anzusehen — von der Planung bis zur Abrechnung.</p>
+
+    <div class="pvs-grid">
+      <a class="pvs-card" href="#dampsoft">
+        <span class="name">Dampsoft</span>
+        <span class="sub">Roger &amp; Dampsoft &middot; HKP &amp; Privatpläne</span>
+        <span class="go">Workflows ansehen &rarr;</span>
+      </a>
+      <a class="pvs-card" href="#charly">
+        <span class="name">Charly</span>
+        <span class="sub">Roger &amp; Charly &middot; HKP &amp; Privatpläne</span>
+        <span class="go">Workflows ansehen &rarr;</span>
+      </a>
+      <a class="pvs-card" href="#z1">
+        <span class="name">Z1</span>
+        <span class="sub">Roger &amp; Z1 &middot; HKP &amp; Privatpläne</span>
+        <span class="go">Workflows ansehen &rarr;</span>
+      </a>
+    </div>
+
+    <footer class="site">
+      <span>Leitfaden, um den Roger&#8209;Desk aufzuräumen</span>
+      <span>Bitte keine echten Patientendaten in Screenshots oder Schulungen verwenden.</span>
+    </footer>
+  </section>
+
+  <!-- ================= PVS-Seite ================= -->
+  <section id="pvsView" hidden>
+    <a class="backlink" href="#home">&larr; Zur PVS&#8209;Auswahl</a>
+    <header class="site">
+      <div>
+        <p class="eyebrow">Schulungsunterlagen</p>
+        <h1><span class="brand" id="brandTitle">Roger &amp; Dampsoft</span> <span class="variant">– <span id="variantTitle">HKP</span></span></h1>
+        <p class="hint"><strong>Tipp:</strong> Fahren Sie mit der Maus über einen Phasen&#8209;Titel (Planung, Zustimmung, Behandlung, Abrechnung), um den ausführlichen Leitfaden zur Phase einzublenden. Auf Touch&#8209;Geräten einfach antippen.</p>
+      </div>
+      <nav class="tabs" role="tablist" aria-label="Planart wählen">
+        <button role="tab" id="tab-hkp" aria-selected="true" data-tab="hkp">HKP</button>
+        <button role="tab" id="tab-privat" aria-selected="false" data-tab="privat">Privatpläne</button>
+      </nav>
+    </header>
+
+    <div class="board-scroller">
+      <div class="board" id="board"></div>
+    </div>
+
+    <div class="legend" id="legend"></div>
+
+    <footer class="site">
+      <span id="footerNote">Leitfaden, um den Roger&#8209;Desk aufzuräumen</span>
+      <span>Bitte keine echten Patientendaten in Screenshots oder Schulungen verwenden.</span>
+    </footer>
+  </section>
+</div>
+
+<script>
+(function () {
+  // ---------- Bausteine ----------
+  const pill = (t) => ({ kind: "pill", text: t });
+  const pills = (rows) => ({ kind: "pills", rows }); // [["Eingabe","leer"], ...]
+  const card = (html, opts) => Object.assign({ kind: "card", html }, opts || {});
+  const chip = (t) => '<span class="chip">' + t + "</span>";
+  const EMPTY = { kind: "empty" };
+
+  const COLS = ["plan", "z_o", "z_w", "b_o", "b_w", "ab"];
+
+  const ROW_DEFS = [
+    { key: "status" }, // Label kommt aus dem PVS (In Dampsoft / Charly Status / In Z1)
+    { key: "vorgang", label: "Vorgang" },
+    { key: "roger", label: 'In <span class="roger">Roger</span>' },
+    { key: "aufgaben", label: "Eure Aufgaben" },
+    { key: "warum", label: "Warum springt der Plan in die nächste Phase?" },
+  ];
+
+  // In-Roger-Inhalte, die bei allen PVS identisch sind (Zustimmung + Behandlung)
+  const ROGER_STANDARD = {
+    z_o: [card("Patient hat die Nachrichten ignoriert, Patient hat keine gültige Telefonnummer")],
+    z_w: [card("Roger schickt dem Patienten 2 automatische " + chip("Statusabfragen") + " nach X und Y Wochen", { beige: true })],
+    b_o: [
+      card("<strong>Patient hat einen Termin:</strong>", { fit: true }),
+      card("Termine passen zum Plan:<br>Aufgabe abhaken, Plan in die Wiedervorlage legen, bis Behandlung abgeschlossen ist"),
+      card("Termine passen nicht zum Plan (Kontrolle, PZR): Patienten anrufen und Termine ausmachen"),
+    ],
+    b_w: [
+      card("<strong>Patient hat keinen Termin:</strong>", { fit: true, beige: true }),
+      card("Roger schickt eine automatische " + chip("Terminbuchungsaufforderung") + " nach Zeitraum X.", { beige: true }),
+      card("Auch terminierte Pläne, die händisch in die Wiedervorlage gelegt wurden (bekommen aber keine erneute Terminbuchungsaufforderung)", { beige: true }),
+    ],
+  };
+
+  const AUFGABEN_STANDARD = {
+    plan: [card("Plan dem Patienten übergeben")],
+    z_o: [card("Patienten anrufen")], z_w: [EMPTY],
+    b_o: [card("Termine vereinbaren")], b_w: [EMPTY],
+  };
+
+  // ---------- Dampsoft ----------
+  const DAMPSOFT = {
+    name: "Roger &amp; Dampsoft",
+    statusLabel: "In Dampsoft",
+    legendHidden: "Wird nicht abgerechnet",
+    footer: "Leitfaden, um den Roger&#8209;Desk aufzuräumen &middot; Dampsoft (DS)",
+    tabs: {
+      hkp: {
+        status: { plan: [pill("Aufstellungsdatum")], z_o: [pill("Druckdatum")], z_w: [pill("Druckdatum")], b_o: [pill("Zuschussdatum")], b_w: [pill("Zuschussdatum")], ab: [pill("Eingliederungsdatum")] },
+        vorgang: {
+          plan: [card("Plan wurde in Dampsoft erstellt, der Patient hat ihn noch nicht gesehen")],
+          z_o: [card("Patient hat den Plan bekommen, aber seine Zustimmung noch nicht gegeben oder der Plan befindet sich bei der Kasse", { span: 2 })],
+          b_o: [card("Patient hat dem Plan zugestimmt, die Kasse hat den Plan genehmigt. Die Behandlung kann starten oder ist am Laufen", { span: 2 })],
+          ab: [card("Behandlung ist abgeschlossen und der Plan kann abgerechnet werden")],
+        },
+        roger: Object.assign({
+          plan: [card("Plan wird angezeigt und wartet auf die Übergabe")],
+          ab: [card("Plan wird angezeigt und wartet darauf, abgerechnet zu werden")],
+        }, ROGER_STANDARD),
+        aufgaben: Object.assign({ ab: [card("Plan abrechnen")] }, AUFGABEN_STANDARD),
+        warum: {
+          plan: [card("Plan wurde gedruckt oder als PDF gespeichert, Druckdatum wurde automatisch erfasst")],
+          z_o: [card("Patient und Kassen haben zugestimmt<br>" + chip("Zuschussdatum") + " + " + chip("Unterschriftsdatum"), { span: 2 })],
+          b_o: [card("Behandlung abgeschlossen, " + chip("Eingliederungsdatum hinterlegt"), { span: 2 })],
+          ab: [card(chip("Abrechnungsdatum") + " hinterlegen &rarr; verschwindet aus Roger")],
+        },
+      },
+      privat: {
+        status: { plan: [pill("Aufstellungsdatum")], z_o: [pill("Druckdatum")], z_w: [pill("Druckdatum")], b_o: [pill("Unterschriftsdatum")], b_w: [pill("Unterschriftsdatum")], ab: [EMPTY] },
+        vorgang: {
+          plan: [card("Plan wurde in Dampsoft erstellt, der Patient hat ihn noch nicht gesehen")],
+          z_o: [card("Patient hat den Plan bekommen, aber seine Zustimmung noch nicht gegeben", { span: 2 })],
+          b_o: [card("Patient hat dem Plan zugestimmt. Die Behandlung kann starten oder ist am Laufen", { span: 2 })],
+          ab: [EMPTY],
+        },
+        roger: Object.assign({
+          plan: [card("Plan wird angezeigt und wartet auf die Übergabe")],
+          ab: [card("Plan wird hier nicht angezeigt, da das Eingliederungsdatum bei Privatplänen als Abrechnungsdatum zählt")],
+        }, ROGER_STANDARD),
+        aufgaben: Object.assign({ ab: [EMPTY] }, AUFGABEN_STANDARD),
+        warum: {
+          plan: [card("Plan wurde gedruckt oder als PDF gespeichert, Druckdatum wurde automatisch erfasst")],
+          z_o: [card("Patient hat zugestimmt und das Unterschriftsdatum wurde eingetragen", { span: 2 })],
+          b_o: [card("Behandlung abgeschlossen, " + chip("Eingliederungsdatum hinterlegt"), { span: 2 })],
+          ab: [EMPTY],
+        },
+      },
+    },
+    phases: {
+      plan: "<ul>" +
+        "<li>In dieser Phase befinden sich Pläne, die <span class='k'>neu erstellt</span> und noch nicht dem Patienten übergeben worden sind.</li>" +
+        "<li>Hier ist die Aufgabe, den Plan zu <span class='k'>drucken</span> und ihn dem Patienten zu übergeben.</li>" +
+        "<li>Ist das <span class='k'>Druckdatum</span> erfasst (passiert automatisch), springt der Plan in die Zustimmungsphase.</li>" +
+        "</ul>",
+      zustimmung: "<ul>" +
+        "<li>Hier befinden sich nur Pläne, die der Patient erhalten, aber noch <span class='k'>nicht zugestimmt</span> hat.</li>" +
+        "<li>Während der Zustimmungsphase werden keine Termine berücksichtigt. Falls der Patient schon Termine vereinbart hat, kann der Plan manuell in Roger über <span class='k'>&bdquo;Patient hat eingewilligt&ldquo;</span> weitergeschoben werden &ndash; oder, wenn er bereits unterschrieben hat, werden Unterschriftsdatum + Zuschussdatum in Dampsoft im Plan eingefügt.</li>" +
+        "<li>Roger versendet <span class='k'>zwei automatische Statusabfragen</span> bezüglich der Zustimmung des Patienten.</li>" +
+        "<li>Automationen werden gestoppt, sobald das <span class='k'>Unterschriftsdatum</span> im HKP erfasst wird.</li>" +
+        "<li>Dann erfolgt der Versand via <span class='k'>EBZ</span>. Sobald der Plan genehmigt ist, wird das Zuschussdatum eingefügt.</li>" +
+        "<li>Sind <span class='k'>Unterschriftsdatum + Zuschussdatum</span> eingefügt, wandert der Plan in die Behandlungsphase.</li>" +
+        "</ul>",
+      behandlung: "<ul>" +
+        "<li>In dieser Phase befinden sich nur <span class='k'>genehmigte Pläne</span>. Zuschuss- und Unterschriftsdatum wurden im DS eingefügt, der Plan rutscht automatisch in die Wiedervorlage.<ul>" +
+        "<li>Patient hat Termine &rarr; Plan rutscht in <span class='k'>Offen</span>. Aufgabe: prüfen, ob die anstehenden Termine für den Plan sind.</li>" +
+        "<li>Patient hat keine Termine &rarr; Plan bleibt in der <span class='k'>Wiedervorlage</span>, plant eine automatische Terminbuchungsaufforderung und rutscht nach der Automation in Offen.</li>" +
+        "<li>Danach prüfen, ob der Patient Termine für diesen Plan vereinbart hat: falls ja &rarr; Aufgabe abhaken, Plan rutscht für Zeitraum X in die Wiedervorlage. Falls nein &rarr; telefonisch nachhaken oder manuelle Terminbuchungsaufforderung versenden.</li></ul></li>" +
+        "<li>Hat der Patient bereits einen Termin für den jeweiligen Plan &rarr; Aufgabe abhaken und für X Wochen in die Wiedervorlage schicken.</li>" +
+        "<li>Hat der Patient Termine, aber keine für diesen spezifischen Plan, kann eine <span class='k'>manuelle Terminbuchungsaufforderung</span> versendet werden.</li>" +
+        "<li>Die Automationen werden gestoppt, sobald es anstehende Termine gibt.</li>" +
+        "<li><span class='k'>Privatpläne</span> verschwinden mit dem Eingliederungsdatum automatisch aus dem Roger-Desk, da es bei diesen kein Abrechnungsdatum gibt.</li>" +
+        "<li>Sobald das <span class='k'>Eingliederungsdatum</span> in Dampsoft eingefügt wurde, wandert der Plan in die Abrechnungsphase.</li>" +
+        "</ul>",
+      abrechnung: "<ul>" +
+        "<li>In dieser Phase befinden sich nur <span class='k'>abzurechnende Pläne</span>.</li>" +
+        "<li><span class='k'>Abrechnungsdatum</span> einfügen, wenn der Plan abgerechnet wurde.</li>" +
+        "<li>Ist das Abrechnungsdatum eingefügt, verschwindet der Plan aus dem Roger-Desk.</li>" +
+        "</ul>",
+    },
+  };
+
+  // ---------- Charly ----------
+  const CHARLY = {
+    name: "Roger &amp; Charly",
+    statusLabel: "Charly Status",
+    legendHidden: "Verworfen",
+    footer: "Leitfaden, um den Roger&#8209;Desk aufzuräumen &middot; Charly",
+    tabs: {
+      hkp: {
+        status: {
+          plan: [pills([["Eingabe", "leer"]])],
+          z_o: [pills([["Eingabe", "bei Patient"], ["Eingabe", "bei Kasse"]])],
+          z_w: [pills([["Eingabe", "bei Patient"], ["Eingabe", "bei Kasse"]])],
+          b_o: [pills([["Genehmigt", "leer"]])],
+          b_w: [pills([["Genehmigt", "leer"]])],
+          ab: [pills([["Genehmigt", "eingegliedert/erbracht"]])],
+        },
+        vorgang: {
+          plan: [card("Plan wurde in Charly erstellt, der Patient hat ihn noch nicht gesehen")],
+          z_o: [card("Patient hat den Plan bekommen, aber seine Zustimmung noch nicht gegeben oder der Plan befindet sich bei der Kasse", { span: 2 })],
+          b_o: [card("Patient hat dem Plan zugestimmt, die Kasse hat den Plan genehmigt. Die Behandlung kann starten oder ist am Laufen", { span: 2 })],
+          ab: [card("Behandlung ist abgeschlossen und der Plan kann abgerechnet werden")],
+        },
+        roger: Object.assign({
+          plan: [card("Plan wird angezeigt und wartet auf Eingabe + bei Patient oder bei Kasse")],
+          ab: [card("Roger wartet, bis der Plan abgerechnet wurde und der Status auf Durchgeführt gesetzt wird")],
+        }, ROGER_STANDARD),
+        aufgaben: Object.assign({ ab: [card("Plan abrechnen")] }, AUFGABEN_STANDARD),
+        warum: {
+          plan: [card("Charly Substatus auf " + chip("bei Patient") + " oder " + chip("bei Kasse") + " geändert")],
+          z_o: [card("Patient und Kasse haben zugestimmt &amp; Status: " + chip("Genehmigt") + " + " + chip("leer"), { span: 2 })],
+          b_o: [card("Behandlung abgeschlossen, Charly Status geändert auf " + chip("Genehmigt") + " + " + chip("eingegliedert") + " oder " + chip("erbracht"), { span: 2 })],
+          ab: [card("Plan auf " + chip("Durchgeführt") + " setzen &rarr; verschwindet aus Roger")],
+        },
+      },
+      privat: {
+        status: {
+          plan: [pills([["Eingabe", "leer"]])],
+          z_o: [pills([["Eingabe", "bei Patient"]])],
+          z_w: [pills([["Eingabe", "bei Patient"]])],
+          b_o: [pills([["Genehmigt", "leer"]])],
+          b_w: [pills([["Genehmigt", "leer"]])],
+          ab: [pills([["Genehmigt", "eingegliedert/erbracht"]])],
+        },
+        vorgang: {
+          plan: [card("Plan wurde in Charly erstellt, der Patient hat ihn noch nicht gesehen")],
+          z_o: [card("Patient hat den Plan bekommen, aber seine Zustimmung noch nicht gegeben", { span: 2 })],
+          b_o: [card("Patient hat dem Plan zugestimmt, die Behandlung kann starten oder ist am Laufen", { span: 2 })],
+          ab: [card("Behandlung ist abgeschlossen und der Plan kann abgerechnet werden")],
+        },
+        roger: Object.assign({
+          plan: [card("Plan wird angezeigt und wartet auf Eingabe + bei Patient")],
+          ab: [card("Roger wartet, bis der Plan abgerechnet wurde und der Status auf Durchgeführt gesetzt wird")],
+        }, ROGER_STANDARD),
+        aufgaben: Object.assign({ ab: [card("Plan abrechnen")] }, AUFGABEN_STANDARD),
+        warum: {
+          plan: [card("Charly Substatus auf " + chip("bei Patient") + " geändert")],
+          z_o: [card("Patient und Kasse haben zugestimmt &amp; Status: " + chip("Genehmigt") + " + " + chip("leer"), { span: 2 })],
+          b_o: [card("Behandlung abgeschlossen, Charly Status geändert auf " + chip("Genehmigt") + " + " + chip("eingegliedert/erbracht"), { span: 2 })],
+          ab: [card("Plan auf " + chip("Durchgeführt") + " setzen &rarr; verschwindet aus Roger")],
+        },
+      },
+    },
+    phases: {
+      plan: "<ul>" +
+        "<li>In dieser Phase befinden sich Pläne, die <span class='k'>neu erstellt</span> und noch nicht dem Patienten übergeben worden sind.</li>" +
+        "<li>Hier ist die Aufgabe, den Plan zu <span class='k'>drucken</span> und ihn dem Patienten zu übergeben.</li>" +
+        "<li>Ist der Status in Charly erfasst (links <span class='k'>&bdquo;Eingabe&ldquo;</span> + rechts <span class='k'>&bdquo;bei Patient&ldquo;</span> oder <span class='k'>&bdquo;bei Kasse&ldquo;</span>), springt der Plan in die Zustimmungsphase.</li>" +
+        "</ul>",
+      zustimmung: "<ul>" +
+        "<li>Hier befinden sich nur Pläne, die der Patient erhalten, aber noch <span class='k'>nicht zugestimmt</span> hat.</li>" +
+        "<li>Während der Zustimmungsphase werden keine Termine berücksichtigt. Falls der Patient schon Termine vereinbart hat, kann der Plan manuell in Roger über <span class='k'>&bdquo;Patient hat eingewilligt&ldquo;</span> weitergeschoben werden &ndash; oder, wenn er bereits unterschrieben hat, wird der Substatus in Charly links auf <span class='k'>&bdquo;Genehmigt&ldquo;</span> &amp; rechts auf <span class='k'>&bdquo;leer&ldquo;</span> gesetzt.</li>" +
+        "<li>Roger versendet <span class='k'>zwei automatische Statusabfragen</span> bezüglich der Zustimmung des Patienten.</li>" +
+        "<li>Automationen werden gestoppt, sobald der Substatus rechts auf <span class='k'>&bdquo;bei Kasse&ldquo;</span> gesetzt wird.</li>" +
+        "<li>Dann erfolgt der Versand via <span class='k'>EBZ</span>. Sobald der Plan genehmigt ist, wird der Substatus links auf &bdquo;Genehmigt&ldquo; gesetzt.</li>" +
+        "<li>Steht links <span class='k'>&bdquo;Genehmigt&ldquo;</span> und rechts <span class='k'>&bdquo;leer&ldquo;</span>, wandert der Plan in die Behandlungsphase.</li>" +
+        "</ul>",
+      behandlung: "<ul>" +
+        "<li>In dieser Phase befinden sich nur <span class='k'>genehmigte Pläne</span>. Der Plan wird auf genehmigt gesetzt und rutscht automatisch in die Wiedervorlage.<ul>" +
+        "<li>Patient hat Termine &rarr; Plan rutscht in <span class='k'>Offen</span>. Aufgabe: prüfen, ob die anstehenden Termine für den Plan sind.</li>" +
+        "<li>Patient hat keine Termine &rarr; Plan bleibt in der <span class='k'>Wiedervorlage</span>, Roger plant eine automatische Terminbuchungsaufforderung, danach rutscht der Plan in Offen.</li>" +
+        "<li>Danach prüfen, ob der Patient Termine für diesen Plan vereinbart hat: falls ja &rarr; Aufgabe abhaken, Plan rutscht für Zeitraum X in die Wiedervorlage. Falls nein &rarr; telefonisch nachhaken oder manuelle Terminbuchungsaufforderung versenden.</li></ul></li>" +
+        "<li>Hat der Patient bereits einen Termin für den jeweiligen Plan &rarr; Aufgabe abhaken und für X Wochen in die Wiedervorlage schicken.</li>" +
+        "<li>Hat der Patient Termine, aber keine für diesen spezifischen Plan, kann eine <span class='k'>manuelle Terminbuchungsaufforderung</span> versendet werden.</li>" +
+        "<li>Die Automationen werden gestoppt, sobald es anstehende Termine gibt.</li>" +
+        "<li>Sobald der Substatus links <span class='k'>&bdquo;Genehmigt&ldquo;</span> und rechts <span class='k'>&bdquo;eingegliedert/erbracht&ldquo;</span> gesetzt wurde, wandert der Plan in die Abrechnungsphase.</li>" +
+        "</ul>",
+      abrechnung: "<ul>" +
+        "<li>In dieser Phase befinden sich nur <span class='k'>abzurechnende Pläne</span>.</li>" +
+        "<li>Auf <span class='k'>&bdquo;Durchgeführt&ldquo;</span> setzen, wenn der Plan abgerechnet wurde.</li>" +
+        "<li>Ist der Status auf &bdquo;Durchgeführt&ldquo; gesetzt, verschwindet der Plan aus Roger.</li>" +
+        "</ul>",
+    },
+  };
+
+  // ---------- Z1 ----------
+  const Z1 = {
+    name: "Roger &amp; Z1",
+    statusLabel: "In Z1",
+    legendHidden: "Verworfen",
+    footer: "Leitfaden, um den Roger&#8209;Desk aufzuräumen &middot; Z1",
+    tabs: {
+      hkp: {
+        status: { plan: [pill("Planungsdatum")], z_o: [pill("Druckdatum")], z_w: [pill("Druckdatum")], b_o: [pill("Genehmigungsdatum")], b_w: [pill("Genehmigungsdatum")], ab: [EMPTY] },
+        vorgang: {
+          plan: [card("Plan wurde in Z1 erstellt, der Patient hat ihn noch nicht gesehen")],
+          z_o: [card("Patient hat den Plan bekommen, aber seine Zustimmung noch nicht gegeben oder der Plan befindet sich bei der Kasse", { span: 2 })],
+          b_o: [card("Patient hat dem Plan zugestimmt, die Kasse hat den Plan genehmigt. Die Behandlung kann starten oder ist am Laufen", { span: 2 })],
+          ab: [EMPTY],
+        },
+        roger: Object.assign({
+          plan: [card("Plan wird angezeigt und wartet auf die Übergabe/Druckdatum")],
+          ab: [card("Der Plan wird hier nicht angezeigt, da das Eingliederungsdatum nur in Kombination mit dem Abrechnungsdatum einfügbar ist")],
+        }, ROGER_STANDARD),
+        aufgaben: Object.assign({ ab: [EMPTY] }, AUFGABEN_STANDARD),
+        warum: {
+          plan: [card("Plan wurde gedruckt oder als PDF gespeichert, Druckdatum wurde automatisch erfasst")],
+          z_o: [card("Bestätigungsdatum + Genehmigungsdatum", { span: 2 })],
+          b_o: [card("Eingliederungsdatum + Abrechnungsdatum = Plan verschwindet", { span: 2 })],
+          ab: [EMPTY],
+        },
+      },
+      privat: {
+        status: { plan: [pill("Planungsdatum")], z_o: [pill("Druckdatum")], z_w: [pill("Druckdatum")], b_o: [pill("Genehmigungsdatum")], b_w: [pill("Genehmigungsdatum")], ab: [EMPTY] },
+        vorgang: {
+          plan: [card("Plan wurde in Z1 erstellt, der Patient hat ihn noch nicht gesehen")],
+          z_o: [card("Patient hat den Plan bekommen, aber seine Zustimmung noch nicht gegeben", { span: 2 })],
+          b_o: [card("Patient hat dem Plan zugestimmt. Die Behandlung kann starten oder ist am Laufen", { span: 2 })],
+          ab: [EMPTY],
+        },
+        roger: Object.assign({
+          plan: [card("Plan wird angezeigt und wartet auf die Übergabe/Druckdatum")],
+          ab: [card("Der Plan wird hier nicht angezeigt, da das Eingliederungsdatum nur in Kombination mit dem Abrechnungsdatum einfügbar ist")],
+        }, ROGER_STANDARD),
+        aufgaben: Object.assign({ ab: [EMPTY] }, AUFGABEN_STANDARD),
+        warum: {
+          plan: [card("Plan wurde gedruckt oder als PDF gespeichert, Druckdatum wurde automatisch erfasst")],
+          z_o: [card("Patient hat zugestimmt und Bestätigungsdatum eingetragen", { span: 2 })],
+          b_o: [card("Eingliederungsdatum + Abrechnungsdatum = Plan verschwindet", { span: 2 })],
+          ab: [EMPTY],
+        },
+      },
+    },
+    phases: {
+      plan: "<ul>" +
+        "<li>In dieser Phase befinden sich nur Pläne, die <span class='k'>neu erstellt</span> und noch nicht dem Patienten übergeben worden sind.</li>" +
+        "<li>Hier ist die Aufgabe, den Plan zu <span class='k'>drucken</span> und ihn dem Patienten zu übergeben.</li>" +
+        "<li>Ist das <span class='k'>Druckdatum</span> erfasst (passiert automatisch), springt der Plan in die Zustimmungsphase.</li>" +
+        "</ul>",
+      zustimmung: "<ul>" +
+        "<li>Hier befinden sich nur Pläne, die der Patient erhalten, aber noch <span class='k'>nicht zugestimmt</span> hat.</li>" +
+        "<li>Während der Zustimmungsphase werden keine Termine berücksichtigt. Falls der Patient schon Termine vereinbart hat, kann der Plan manuell in Roger über <span class='k'>&bdquo;Patient hat eingewilligt&ldquo;</span> weitergeschoben werden &ndash; oder, wenn er bereits unterschrieben hat, werden das <span class='k'>Bestätigtdatum</span> und das <span class='k'>Genehmigtdatum</span> in Z1 im Plan eingefügt.</li>" +
+        "<li>Roger versendet <span class='k'>zwei automatische Statusabfragen</span> bezüglich der Zustimmung des Patienten.</li>" +
+        "<li>Die Automationen werden gestoppt, sobald das <span class='k'>Bestätigtdatum</span> im Plan eingetragen wurde.</li>" +
+        "<li>Dann erfolgt der Versand via <span class='k'>EBZ</span>. Sobald der Plan genehmigt ist, wird das Genehmigtdatum eingefügt.</li>" +
+        "<li>Sind <span class='k'>Bestätigtdatum und Genehmigtdatum</span> in Z1 hinterlegt, wandert der Plan in die Behandlungsphase.</li>" +
+        "</ul>",
+      behandlung: "<ul>" +
+        "<li>In dieser Phase befinden sich nur <span class='k'>genehmigte Pläne</span>. Bestätigt- und Genehmigungsdatum wurden in Z1 eingefügt, der Plan rutscht automatisch in die Wiedervorlage.<ul>" +
+        "<li>Patient hat Termine &rarr; Plan rutscht in <span class='k'>Offen</span>. Aufgabe: prüfen, ob die anstehenden Termine für den Plan sind.</li>" +
+        "<li>Patient hat keine Termine &rarr; Plan bleibt in der <span class='k'>Wiedervorlage</span>, plant eine automatische Terminbuchungsaufforderung und rutscht nach der Automation in Offen.</li>" +
+        "<li>Danach prüfen, ob der Patient Termine für diesen Plan vereinbart hat: falls ja &rarr; Aufgabe abhaken, Plan rutscht für Zeitraum X in die Wiedervorlage. Falls nein &rarr; telefonisch nachhaken oder manuelle Terminbuchungsaufforderung versenden.</li></ul></li>" +
+        "<li>Hat der Patient bereits einen Termin für den jeweiligen Plan &rarr; Aufgabe abhaken und für X Wochen in die Wiedervorlage schicken.</li>" +
+        "<li>Hat der Patient Termine, aber keine für diesen spezifischen Plan, kann eine <span class='k'>manuelle Terminbuchungsaufforderung</span> versendet werden.</li>" +
+        "<li>Die Automationen werden gestoppt, sobald es anstehende Termine gibt.</li>" +
+        "<li>Sobald das <span class='k'>Eingliederungsdatum</span> und das <span class='k'>Abrechnungsdatum</span> in Z1 eingefügt wurden, verschwindet der Plan aus dem Roger-Desk.</li>" +
+        "</ul>",
+      abrechnung: "<ul>" +
+        "<li>Die Abrechnungsphase kann in Z1 leider <span class='k'>nicht genutzt</span> werden.</li>" +
+        "<li>In der Regel bewegt das Eingliederungsdatum den Plan in die Abrechnungsphase &ndash; in Z1 ist es aber nur in <span class='k'>Kombination mit dem Abrechnungsdatum</span> einfügbar, was den Plan direkt aus Roger verschwinden lässt.</li>" +
+        "</ul>",
+    },
+  };
+
+  const PVS = { dampsoft: DAMPSOFT, charly: CHARLY, z1: Z1 };
+
+  const PHASE_META = [
+    { key: "plan", num: 1, title: "Planungsphase", label: "Planung", cols: ["plan"] },
+    { key: "zustimmung", num: 2, title: "Zustimmungsphase", label: "Zustimmung", cols: ["z_o", "z_w"] },
+    { key: "behandlung", num: 3, title: "Behandlungsphase", label: "Behandlung", cols: ["b_o", "b_w"] },
+    { key: "abrechnung", num: 4, title: "Abrechnungsphase", label: "Abrechnung", cols: ["ab"] },
+  ];
+
+  // ---------- Rendern ----------
+  const homeView = document.getElementById("homeView");
+  const pvsView = document.getElementById("pvsView");
+  const board = document.getElementById("board");
+  const legend = document.getElementById("legend");
+  const brandTitle = document.getElementById("brandTitle");
+  const variantTitle = document.getElementById("variantTitle");
+  const footerNote = document.getElementById("footerNote");
+
+  let currentPvs = null;
+  let currentTab = "hkp";
+  let openPhase = null;
+
+  function colStart(key) { return 2 + COLS.indexOf(key); }
+
+  function renderBoard() {
+    const pvs = PVS[currentPvs];
+    const data = pvs.tabs[currentTab];
+    closePanel();
+    board.innerHTML = "";
+
+    PHASE_META.forEach((ph) => {
+      const el = document.createElement("div");
+      el.className = "phase-head";
+      el.dataset.phase = ph.key;
+      el.tabIndex = 0;
+      el.setAttribute("role", "button");
+      el.setAttribute("aria-label", ph.title + " – Details anzeigen");
+      el.style.gridColumn = colStart(ph.cols[0]) + " / span " + ph.cols.length;
+      el.innerHTML = "<span>" + ph.label + "</span><i class='info'>i</i>";
+      board.appendChild(el);
+    });
+
+    [["z_o", "offen", "Offen"], ["z_w", "wv", "Wiedervorlage"], ["b_o", "offen", "Offen"], ["b_w", "wv", "Wiedervorlage"]].forEach(([col, cls, label]) => {
+      const el = document.createElement("div");
+      el.className = "subhead " + cls;
+      el.dataset.col = col;
+      el.style.gridColumn = String(colStart(col));
+      el.textContent = label;
+      board.appendChild(el);
+    });
+
+    ROW_DEFS.forEach((row, ri) => {
+      const gridRow = 3 + ri;
+      const label = document.createElement("div");
+      label.className = "rowlabel";
+      label.style.gridRow = String(gridRow);
+      label.innerHTML = row.key === "status" ? pvs.statusLabel : row.label;
+      board.appendChild(label);
+
+      const rowData = data[row.key] || {};
+      COLS.forEach((col) => {
+        const items = rowData[col];
+        if (!items) return;
+        const span = items.reduce((s, it) => Math.max(s, it.span || 1), 1);
+        const cell = document.createElement("div");
+        cell.className = "cell";
+        cell.dataset.col = col;
+        cell.style.gridRow = String(gridRow);
+        cell.style.gridColumn = colStart(col) + " / span " + span;
+        items.forEach((it) => {
+          const c = document.createElement("div");
+          if (it.kind === "pill") {
+            c.className = "card";
+            c.innerHTML = '<span class="pill">' + it.text + "</span>";
+          } else if (it.kind === "pills") {
+            c.className = "card";
+            c.innerHTML = it.rows.map((r) =>
+              '<div class="pillrow">' + r.map((t) => '<span class="pill">' + t + "</span>").join('<span class="plus">+</span>') + "</div>"
+            ).join("");
+          } else if (it.kind === "empty") {
+            c.className = "card empty";
+          } else {
+            c.className = "card" + (it.beige ? " beige" : "") + (it.fit ? " fit" : "");
+            c.innerHTML = it.html;
+          }
+          cell.appendChild(c);
+        });
+        board.appendChild(cell);
+      });
+    });
+
+    const panel = document.createElement("div");
+    panel.className = "panel";
+    panel.id = "phasePanel";
+    board.appendChild(panel);
+
+    wireHover();
+  }
+
+  function renderPvs(pvsKey, tabKey) {
+    currentPvs = pvsKey;
+    currentTab = tabKey || "hkp";
+    const pvs = PVS[pvsKey];
+    brandTitle.innerHTML = pvs.name;
+    variantTitle.textContent = currentTab === "hkp" ? "HKP" : "Privatpläne";
+    footerNote.innerHTML = pvs.footer;
+    legend.innerHTML = "<span>&#9432;</span>" +
+      '<span>Plan &rarr; <span class="chip">' + pvs.legendHidden + "</span>: Plan wird aus Roger ausgeblendet</span>" +
+      '<span><span class="chip">Offen</span>: &bdquo;to&#8209;do&ldquo;-Bereich</span>' +
+      '<span><span class="chip">Wiedervorlage</span>: keine Aufgabe für euch</span>';
+    document.querySelectorAll(".tabs button").forEach((b) => b.setAttribute("aria-selected", String(b.dataset.tab === currentTab)));
+    renderBoard();
+  }
+
+  // ---------- Hover / Tap ----------
+  function panelEl() { return document.getElementById("phasePanel"); }
+
+  function openPanelFor(head) {
+    const ph = PHASE_META.find((p) => p.key === head.dataset.phase);
+    if (!ph) return;
+    openPhase = ph.key;
+    const panel = panelEl();
+    panel.innerHTML = "<h3><span class='num'>" + ph.num + ".</span>" + ph.title + "</h3>" + PVS[currentPvs].phases[ph.key];
+    panel.classList.add("open");
+
+    const top = head.offsetTop + head.offsetHeight + 8;
+    let left = head.offsetLeft;
+    const maxLeft = board.scrollWidth - panel.offsetWidth - 8;
+    if (left > maxLeft) left = Math.max(8, maxLeft);
+    panel.style.top = top + "px";
+    panel.style.left = left + "px";
+
+    board.classList.add("dim-others");
+    board.querySelectorAll(".cell, .subhead").forEach((el) => {
+      el.classList.toggle("hl", ph.cols.includes(el.dataset.col));
+    });
+    head.classList.add("active");
+  }
+
+  function closePanel() {
+    openPhase = null;
+    const panel = panelEl();
+    if (panel) panel.classList.remove("open");
+    board.classList.remove("dim-others");
+    board.querySelectorAll(".hl").forEach((el) => el.classList.remove("hl"));
+    board.querySelectorAll(".phase-head.active").forEach((el) => el.classList.remove("active"));
+  }
+
+  function wireHover() {
+    let hoverTimer = null;
+    board.querySelectorAll(".phase-head").forEach((head) => {
+      head.addEventListener("mouseenter", () => {
+        clearTimeout(hoverTimer);
+        openPanelFor(head);
+      });
+      head.addEventListener("mouseleave", () => {
+        hoverTimer = setTimeout(() => {
+          if (!panelEl().matches(":hover")) closePanel();
+        }, 120);
+      });
+      head.addEventListener("click", (e) => {
+        e.stopPropagation();
+        if (openPhase === head.dataset.phase) closePanel();
+        else openPanelFor(head);
+      });
+      head.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") { e.preventDefault(); head.click(); }
+        if (e.key === "Escape") closePanel();
+      });
+    });
+    const panel = panelEl();
+    panel.addEventListener("mouseleave", () => closePanel());
+    document.addEventListener("click", (e) => {
+      if (!panel.contains(e.target)) closePanel();
+    });
+  }
+
+  // ---------- Tabs ----------
+  document.querySelectorAll(".tabs button").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      renderPvs(currentPvs, btn.dataset.tab);
+    });
+  });
+
+  // ---------- Routing ----------
+  function route() {
+    const hash = (location.hash || "#home").replace("#", "");
+    if (PVS[hash]) {
+      homeView.hidden = true;
+      pvsView.hidden = false;
+      renderPvs(hash, "hkp");
+      window.scrollTo(0, 0);
+    } else {
+      pvsView.hidden = true;
+      homeView.hidden = false;
+      window.scrollTo(0, 0);
+    }
+  }
+
+  window.addEventListener("hashchange", route);
+  route();
+})();
+</script>
+
+</body>
+</html>
