@@ -355,13 +355,18 @@
     font-size: 12px;
     padding: 4px 11px;
     white-space: nowrap;
+    hyphens: none;
     flex: 0 0 auto;
   }
 
-  /* Lange Statuswerte dürfen innerhalb der Pille umbrechen */
+  /* Lange Statuswerte dürfen umbrechen – nur am Schrägstrich (via <wbr>), nie mitten im Wort, keine Silbentrennung */
   .pillrow .pill.wrap {
     white-space: normal;
+    overflow-wrap: normal;
+    word-break: keep-all;
+    hyphens: none;
     flex: 0 1 auto;
+    min-width: 0;
     text-align: center;
   }
 
@@ -880,7 +885,7 @@
           } else if (it.kind === "pills") {
             c.className = "card";
             c.innerHTML = it.rows.map((r) =>
-              '<div class="pillrow">' + r.map((t) => '<span class="pill' + (t.length > 14 ? " wrap" : "") + '">' + t + "</span>").join('<span class="plus">+</span>') + "</div>"
+              '<div class="pillrow">' + r.map((t) => '<span class="pill' + (t.length > 14 ? " wrap" : "") + '">' + t.replace(/\//g, "/<wbr>") + "</span>").join('<span class="plus">+</span>') + "</div>"
             ).join("");
           } else if (it.kind === "empty") {
             c.className = "card empty";
