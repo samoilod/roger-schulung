@@ -227,7 +227,7 @@
     position: relative;
     min-width: 1240px;
     display: grid;
-    grid-template-columns: 150px repeat(6, minmax(168px, 1fr));
+    grid-template-columns: 150px repeat(6, minmax(190px, 1fr));
     gap: 12px 14px;
     align-items: stretch;
   }
@@ -329,6 +329,16 @@
     font-weight: 600;
     padding: 5px 14px;
     border-radius: 999px;
+  }
+
+  /* Einzelne Datums-Pille: mittig und immer auf einer Zeile */
+  .card.date { text-align: center; }
+  .card.date .pill {
+    font-size: 12px;
+    padding: 5px 12px;
+    white-space: nowrap;
+    hyphens: none;
+    overflow-wrap: normal;
   }
 
   .pillrow {
@@ -851,7 +861,7 @@
         items.forEach((it) => {
           const c = document.createElement("div");
           if (it.kind === "pill") {
-            c.className = "card";
+            c.className = "card date";
             c.innerHTML = '<span class="pill">' + it.text + "</span>";
           } else if (it.kind === "pills") {
             c.className = "card";
