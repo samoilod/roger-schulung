@@ -191,11 +191,20 @@
   }
   .contact-line a:hover { text-decoration: underline; }
 
-  .privacy-note {
-    margin-top: 32px;
-    font-size: 12.5px;
-    color: var(--muted-light);
+  .back-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 36px;
+    padding: 12px 22px;
+    border-radius: 999px;
+    background: var(--accent);
+    color: #fff;
+    font-weight: 600;
+    font-size: 14.5px;
+    text-decoration: none;
   }
+  .back-button:hover { background: #2519b8; }
 </style>
 </head>
 <body>
@@ -314,27 +323,9 @@
   <h2 class="section-title">Sie benötigen Hilfe?</h2>
   <p class="section-intro">Wir sind gerne jederzeit für Sie da!</p>
 
-  <div class="card">
-    <a class="help-card" href="mailto:support@goroger.com">
-      <span class="badge">✉️</span>
-      <span>
-        <p class="help-title">Per E-Mail erreichen</p>
-        <p class="help-desc">Schreiben Sie uns jederzeit an support@goroger.com.</p>
-      </span>
-    </a>
-  </div>
-
-  <div class="card">
-    <a class="help-card" href="tel:+493091733040">
-      <span class="badge">📞</span>
-      <span>
-        <p class="help-title">Telefonisch erreichen</p>
-        <p class="help-desc">Rufen Sie uns an unter +49 30 91733040.</p>
-      </span>
-    </a>
-  </div>
-
   <p class="contact-line">Lieber persönlich sprechen? Rufen Sie uns unter <a href="tel:+493091733040">+49 30 91733040</a> an, schreiben Sie uns per E-Mail an <a href="mailto:support@goroger.com">support@goroger.com</a> oder wenden Sie sich direkt an Ihre persönliche Kundenbetreuerin.</p>
+
+  <a class="back-button" href="../">← Zurück zum Roger Hilfebereich</a>
 
 </div>
 
