@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Roger: KI-Doku Tool Hilfebereich</title>
+<style>
+  :root {
+    --bg: #f5f1ec;
+    --card-bg: #ffffff;
+    --text: #17161d;
+    --muted: #4c4a52;
+    --muted-light: #706d76;
+    --accent: #2b1fd9;
+    --badge-bg: #eae4dc;
+    --divider: #e2ddd4;
+    --font-serif: "Iowan Old Style", Palatino, "Book Antiqua", Georgia, serif;
+    --font-sans: "Avenir Next", "Segoe UI", system-ui, -apple-system, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: var(--font-sans);
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+  }
+  .wrapper {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 64px 24px 96px;
+  }
+
+  .eyebrow {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1.68px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0 0 18px;
+  }
+
+  h1 {
+    font-family: var(--font-serif);
+    font-size: 44px;
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 0 0 18px;
+  }
+  h1 .accent {
+    color: var(--accent);
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 12' preserveAspectRatio='none'><path d='M0 8 Q 12 2 25 8 T 50 8 T 75 8 T 100 8 T 125 8 T 150 8 T 175 8 T 200 8' fill='none' stroke='%23d9c9a3' stroke-width='4'/></svg>");
+    background-repeat: repeat-x;
+    background-position: 0 bottom;
+    background-size: 100px 10px;
+    padding-bottom: 6px;
+  }
+
+  .intro {
+    color: var(--muted);
+    font-size: 16px;
+    max-width: 620px;
+    margin: 0 0 40px;
+  }
+
+  hr.divider {
+    border: none;
+    border-top: 1px solid var(--divider);
+    margin: 40px 0;
+  }
+
+  h2.section-title {
+    font-family: var(--font-serif);
+    font-size: 24px;
+    font-weight: 700;
+    margin: 0 0 8px;
+  }
+  .section-intro {
+    color: var(--muted);
+    font-size: 15px;
+    margin: 0 0 20px;
+  }
+
+  .card {
+    background: var(--card-bg);
+    border-radius: 18px;
+    box-shadow: 0 1px 2px rgba(23, 22, 29, 0.05), 0 6px 18px rgba(23, 22, 29, 0.06);
+    border: 2px solid transparent;
+    padding: 28px 26px 24px;
+    margin-bottom: 16px;
+  }
+
+  ol.steps {
+    margin: 0;
+    padding-left: 20px;
+  }
+  ol.steps li {
+    margin-bottom: 12px;
+    color: var(--text);
+  }
+  ol.steps li:last-child { margin-bottom: 0; }
+  ol.steps b { color: var(--accent); }
+  ol.steps span.ex { color: var(--muted-light); font-size: 14.5px; }
+
+  .faq-item {
+    border-bottom: 1px solid var(--divider);
+  }
+  .faq-item:last-child { border-bottom: none; }
+  .faq-question {
+    width: 100%;
+    text-align: left;
+    background: none;
+    border: none;
+    font-family: var(--font-sans);
+    font-size: 15.5px;
+    font-weight: 600;
+    color: var(--text);
+    padding: 16px 0;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+  }
+  .faq-question:hover { color: var(--accent); }
+  .faq-question .arrow {
+    transition: transform 0.2s ease;
+    color: var(--accent);
+    flex-shrink: 0;
+    font-size: 18px;
+  }
+  .faq-item.open .faq-question .arrow {
+    transform: rotate(90deg);
+  }
+  .faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.25s ease;
+    color: var(--muted);
+    font-size: 14.5px;
+  }
+  .faq-answer-inner {
+    padding-bottom: 18px;
+  }
+  .faq-answer ul {
+    margin: 8px 0 0;
+    padding-left: 20px;
+  }
+  .faq-answer li { margin-bottom: 6px; }
+
+  .help-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    text-decoration: none;
+    color: inherit;
+  }
+  .help-card .badge {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: var(--badge-bg);
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+  }
+  .help-card .help-title {
+    font-weight: 700;
+    color: var(--accent);
+    margin: 0 0 2px;
+    font-size: 15.5px;
+  }
+  .help-card .help-desc {
+    color: var(--muted-light);
+    font-size: 14px;
+    margin: 0;
+  }
+
+  .contact-line {
+    color: var(--muted);
+    font-size: 14.5px;
+    margin-top: 8px;
+  }
+  .contact-line a {
+    color: var(--accent);
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .contact-line a:hover { text-decoration: underline; }
+
+  .privacy-note {
+    margin-top: 32px;
+    font-size: 12.5px;
+    color: var(--muted-light);
+  }
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+  <p class="eyebrow">Roger · KI-Doku Tool</p>
+  <h1>Ihr <span class="accent">Hilfebereich</span> für die KI-Dokumentation</h1>
+  <p class="intro">Antworten auf häufige Fragen rund um die KI-gestützte Behandlungsdokumentation – von der Zusammenfassung der Behandlung bis zu Tipps für eine saubere Dokumentation.</p>
+
+  <hr class="divider">
+
+  <h2 class="section-title">In welcher Reihenfolge fasst die KI die Behandlung zusammen?</h2>
+  <p class="section-intro">Unsere Reihenfolge ist immer in 9 Punkten gegliedert:</p>
+  <div class="card">
+    <ol class="steps">
+      <li><b>Allgemeine Informationen</b> <span class="ex">(z. B. Begleitperson, Pat. wirkt ängstlich, hatte vor 2 Wochen eine Hüft-OP etc.)</span></li>
+      <li><b>Anamnese</b> <span class="ex">(z. B. Pat. berichtet seit ca. 2 Wochen anhaltende Schmerzen beim Kauen im rechten Oberkiefer hinten)</span></li>
+      <li><b>Klinischer Befund</b> <span class="ex">(z. B. Zahn 11 weist eine tiefe Karies mesial auf)</span></li>
+      <li><b>Röntgendiagnostik Befund</b> <span class="ex">(z. B. OPG zeigt eine apikale Aufhellung Regio 11)</span></li>
+      <li><b>Diagnose &amp; Beratung</b> <span class="ex">(z. B. Diagnose: tiefe Karies an Zahn 11 / Pat. über Behandlungsoptionen beraten)</span></li>
+      <li><b>Behandlungsdokumentation</b> <span class="ex">(z. B. Füllung am Zahn 11 durchgeführt mit Behandlungsablauf)</span></li>
+      <li><b>Therapieplan</b> <span class="ex">(z. B. weitere Termine)</span></li>
+      <li><b>Aufklärung und Kostenvoranschlag</b></li>
+      <li><b>Rezepte</b> <span class="ex">(Medikamente werden hier aufgelistet)</span></li>
+    </ol>
+  </div>
+
+  <hr class="divider">
+
+  <h2 class="section-title">Tipps für sauberere Dokumentation</h2>
+  <p class="section-intro">Damit Sie optimal in die Arbeit mit dem KI-Doku-Tool starten können, hier ein paar hilfreiche Tipps für einen reibungslosen und effizienten Workflow:</p>
+
+  <div class="card">
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Patienteninformationen
+          <span class="arrow">›</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            Wenn möglich, nennen Sie kurz das <b>Alter des Patienten</b> – insbesondere bei Behandlungen wie dem IP-Block. Zum Beispiel: „Kind, IP-Block durchgeführt.“ So kann die KI den Kontext besser verstehen.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Beratungstermine
+          <span class="arrow">›</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            Erwähnen Sie bei Beratungen kurz, dass der <b>Patient heute zur Beratung</b> erscheint. Dadurch wird die Dokumentation noch präziser.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Deutliche Aussprache
+          <span class="arrow">›</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            Sprechen Sie <b>klar und deutlich</b>, damit das Tool Ihre Angaben optimal erfassen kann. Sollte der Patient zwischendurch mitsprechen, kann das die Erkennung beeinflussen.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Kommunikation mit der KI
+          <span class="arrow">›</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            Je <b>deutlicher und kontinuierlicher</b> Sie mit der KI sprechen, desto <b>genauer</b> verarbeitet sie Ihre Daten.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Nachbearbeitung
+          <span class="arrow">›</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            Falls einzelne Wörter nicht richtig erkannt wurden, können Sie nach dem Stoppen des Mikrofons einfach <b>kurz die wichtigsten Punkte stichwortartig wiederholen</b> – so stellen Sie sicher, dass alle relevanten Informationen korrekt erfasst werden.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          01-Befund
+          <span class="arrow">›</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            Wenn Sie den <b>01-Befund</b> diktieren, ist die <b>Reihenfolge der Angaben</b> wichtig. Bitte nennen Sie zuerst den Zahn, dann den Befund, und anschließend die Fläche(n).
+            <ul>
+              <li><i>Zahn 16 Karies m-o-d</i></li>
+              <li><i>Zahn 47 Kunststofffüllung o-d</i></li>
+            </ul>
+            Nicht andersherum, damit die KI die Angaben korrekt zuordnen kann.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <h2 class="section-title">Sie benötigen Hilfe?</h2>
+  <p class="section-intro">Wir sind gerne jederzeit für Sie da!</p>
+
+  <div class="card">
+    <a class="help-card" href="mailto:support@goroger.com">
+      <span class="badge">✉️</span>
+      <span>
+        <p class="help-title">Per E-Mail erreichen</p>
+        <p class="help-desc">Schreiben Sie uns jederzeit an support@goroger.com.</p>
+      </span>
+    </a>
+  </div>
+
+  <div class="card">
+    <a class="help-card" href="tel:+493091733040">
+      <span class="badge">📞</span>
+      <span>
+        <p class="help-title">Telefonisch erreichen</p>
+        <p class="help-desc">Rufen Sie uns an unter +49 30 91733040.</p>
+      </span>
+    </a>
+  </div>
+
+  <p class="contact-line">Lieber persönlich sprechen? Rufen Sie uns unter <a href="tel:+493091733040">+49 30 91733040</a> an, schreiben Sie uns per E-Mail an <a href="mailto:support@goroger.com">support@goroger.com</a> oder wenden Sie sich direkt an Ihre persönliche Kundenbetreuerin.</p>
+
+</div>
+
+<script>
+  function toggleFaq(button) {
+    const item = button.parentElement;
+    const answer = item.querySelector('.faq-answer');
+    const isOpen = item.classList.contains('open');
+
+    document.querySelectorAll('.faq-item.open').forEach(el => {
+      if (el !== item) {
+        el.classList.remove('open');
+        el.querySelector('.faq-answer').style.maxHeight = null;
+      }
+    });
+
+    if (isOpen) {
+      item.classList.remove('open');
+      answer.style.maxHeight = null;
+    } else {
+      item.classList.add('open');
+      answer.style.maxHeight = answer.scrollHeight + 'px';
+    }
+  }
+</script>
+
+</body>
+</html>
